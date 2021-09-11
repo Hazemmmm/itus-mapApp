@@ -23,8 +23,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       target: 'map',
       layers: [this.osm],
       view: new View({
-        center: [46.61924841272188, 24.788532584113987],
-        projection: 'EPSG:3857',
+        center: [-21.56232137547406, 132.80792296548023],
+        projection: 'EPSG:4326',
         zoom: 3,
       }),
     });

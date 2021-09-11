@@ -10,6 +10,10 @@ import { MarkerService } from './marker.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [AppComponent, MapComponent, SideBarComponent],
@@ -19,6 +23,10 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatDividerModule,
+    MatToolbarModule,
   ],
   providers: [MarkerService, HeatmapService],
   bootstrap: [AppComponent],
