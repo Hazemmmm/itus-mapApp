@@ -19,7 +19,9 @@ mat-sidenav {
   padding: 16px;
   text-align: center;
 }
-
+.mat-list-text {
+  font-size: 3px;
+}
 .content {
   height: calc(100vh - 98px);
   border-radius: 10px;
@@ -57,7 +59,7 @@ mat-icon {
 }
 
 mat-divider {
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   background-color: rgba(255, 255, 255, 0.5);
 }
