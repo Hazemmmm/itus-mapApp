@@ -5,7 +5,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { statesService } from 'src/app/Map/services/states.service';
 import { StateFeature } from 'src/app/Map/models/stateFeature';
 
-const intersectionList: any[] = [];
+const stateList: any[] = [];
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
@@ -24,21 +24,21 @@ export class SideBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.stateFromList = intersectionList;
+    this.stateFromList = stateList;
     this.getStateList();
   }
 
   getStateList() {
     this.state.getStateList().subscribe((res: any) => {
       for (let state of res.features) {
-        // this.stateList = state.properties;
-        this.intersectionList = state.properties;
-
-        this.stateFromList.push(this.intersectionList);
-        // this.stateList.map((state: any) => this.intersectionList.push(state));
+        this.stateList = state.properties;
+        this.stateFromList.push(this.stateList);
       }
-      console.log(this.stateFromList);
     });
+  }
+
+  onChange(event: any) {
+    console.log(event.value);
   }
 
   ngAfterViewInit() {
@@ -54,5 +54,8 @@ export class SideBarComponent implements OnInit {
           this.sidenav.open();
         }
       });
+  }
+  onSelectDistrict(x: any) {
+    console.log(x);
   }
 }

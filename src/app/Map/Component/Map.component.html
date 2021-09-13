@@ -1,1 +1,41 @@
-<div id="map"></div>
+<div class="base-map-wrapper">
+  <div id="map">
+    <div id="popup" class="ol-popup">
+      <h4 class="top-popup" id="top-popup"></h4>
+      <a
+        href="#"
+        id="popup-closer"
+        class="ol-popup-closer"
+        (click)="closePopUp()"
+      ></a>
+      <div id="popup-content">
+        <table class="table table-striped text-center" style="font-size: 13px">
+          <tbody>
+            <tr>
+              <td colspan="1">ID</td>
+              <td colspan="1">{{ featureID }}</td>
+            </tr>
+            <tr>
+              <td colspan="1">Type</td>
+              <td colspan="1">{{ featureType }}</td>
+            </tr>
+            <tr>
+              <td colspan="1">Title</td>
+              <td colspan="1">{{ featureTitle }}</td>
+            </tr>
+            <tr>
+              <td colspan="1">Desc</td>
+              <td colspan="1">{{ featureDesc }}</td>
+            </tr>
+            <div id="image">
+              <img
+                src="https://png.pngtree.com/png-vector/20190621/ourmid/pngtree-shopstoremarketbuildingshopping-flat-color-icon-vector-png-image_1490507.jpg"
+              />
+            </div>
+          </tbody>
+        </table>
+        ;
+      </div>
+    </div>
+  </div>
+</div>

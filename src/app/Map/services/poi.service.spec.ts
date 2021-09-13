@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HeatmapService } from './heatmap.service';
+import { PoiService } from './poi.service';
 
-describe('HeatmapService', () => {
-  let service: HeatmapService;
+describe('PoiService', () => {
+  let service: PoiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HeatmapService);
+    service = TestBed.inject(PoiService);
   });
 
   it('should be created', () => {

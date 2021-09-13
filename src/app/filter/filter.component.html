@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <mat-label>Filter POIs'</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let poi of pois" [value]="poi.value">
+      {{ poi.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

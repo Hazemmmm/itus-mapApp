@@ -11,6 +11,7 @@
     <img class="image" src="assets/logo/logo.jpg" />
   </a>
   <div style="margin: 1rem">Web Map Application</div>
+  <app-filter></app-filter>
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -19,10 +20,16 @@
 
     <mat-divider></mat-divider>
 
-    <mat-selection-list #states>
+    <mat-selection-list
+      #states
+      [(ngModel)]="selectedOptions"
+      (click)="onSelectDistrict(selectedOptions)"
+    >
       <mat-list-option
-        style="font-size: 14px; color: white;"
+        style="font-size: 14px; color: white"
         *ngFor="let state of stateFromList"
+        [selected]="state.selected"
+        [value]="state"
       >
         {{ state.STATE_NAME }}
       </mat-list-option>

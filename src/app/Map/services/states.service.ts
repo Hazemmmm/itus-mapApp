@@ -55,7 +55,7 @@ export class statesService {
       // }
       this.states_source = new VectorSource({
         format: new GeoJSON(),
-        url: 'assets/data/states.geojson',
+        url: this.url,
       });
       this.states_layer = new VectorLayer({
         source: this.states_source,
