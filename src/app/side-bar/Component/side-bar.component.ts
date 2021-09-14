@@ -65,7 +65,6 @@ export class SideBarComponent implements OnInit {
     for (let i = 0; i < value.length; i++) {
       this.element = value[i].STATE_CODE;
     }
-    console.log('button list', this.isChecked);
     this.interactionDataService.sendFeatureId({
       value: Number(this.element),
       name: 'district',

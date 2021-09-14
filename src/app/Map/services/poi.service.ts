@@ -29,25 +29,7 @@ export class PoiService {
 
   public featureProps: Observable<FeatureType>;
 
-  restaurant_poi_style: Style = new Style({
-    image: new Icon({
-      color: 'green',
-      anchor: [0.5, 0.96],
-      crossOrigin: 'anonymous',
-      src: 'https://openlayers.org/en/v4.6.5/examples/data/icon.png',
-      imgSize: [30, 30],
-    }),
-  });
-  hostpital_poi_style: Style = new Style({
-    image: new Icon({
-      color: 'red',
-      anchor: [0.5, 0.96],
-      crossOrigin: 'anonymous',
-      src: 'https://openlayers.org/en/v4.6.5/examples/data/icon.png',
-      imgSize: [30, 30],
-    }),
-  });
-  market_poi_style: Style = new Style({
+  poi_style: Style = new Style({
     image: new Icon({
       color: 'orange',
       anchor: [0.5, 0.5],
@@ -85,7 +67,7 @@ export class PoiService {
   }
 
   setPOIStyle = (feature: any) => {
-    return this.market_poi_style;
+    return this.poi_style;
   };
 
   handleFilterPoiLayer(): void {}
@@ -106,14 +88,12 @@ export class PoiService {
 
   getPoiFeaturesById(id: number): void {
     this.poi_source.getFeatures().filter((features) => {
-
       if (features.get('typesID') == id) {
         this.featureList = features;
         this.poi_layer.setVisible(false);
 
         this.hiddenSource.addFeatures(this.featureList);
       } else {
-     
         this.poi_layer.setVisible(true);
       }
     });

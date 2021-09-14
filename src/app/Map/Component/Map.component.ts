@@ -93,6 +93,7 @@ export class MapComponent implements OnInit {
       source: this.hiddenSource,
       visible: true,
       zIndex: 6,
+      style: this.setPoiTypesStyle,
     });
 
     this.poi_source = new VectorSource({
@@ -106,50 +107,6 @@ export class MapComponent implements OnInit {
       source: this.poi_source,
       zIndex: 5,
       style: this.setPoiTypesStyle,
-      // style: function (feature, resolution) {
-      //   var style;
-      //   console.log(feature.getProperties()['types']);
-      //   switch (feature.getProperties()['types']) {
-      //     case 'hospital':
-      //       style = new Style({
-      //         image: new Circle({
-      //           radius: 7,
-      //           fill: new Fill({ color: 'black' }),
-      //           stroke: new Stroke({
-      //             color: 'red',
-      //             width: 2,
-      //           }),
-      //         }),
-      //       });
-      //       break;
-      //     case 'market':
-      //       style = new Style({
-      //         image: new Circle({
-      //           radius: 7,
-      //           fill: new Fill({ color: 'black' }),
-      //           stroke: new Stroke({
-      //             color: 'green',
-      //             width: 2,
-      //           }),
-      //         }),
-      //       });
-      //       break;
-      //     case 'resturant':
-      //       style = new Style({
-      //         image: new Circle({
-      //           radius: 7,
-      //           fill: new Fill({ color: 'black' }),
-      //           stroke: new Stroke({
-      //             color: 'yellow',
-      //             width: 2,
-      //           }),
-      //         }),
-      //       });
-      //       break;
-      //   }
-
-      //   return [style];
-      // },
     });
 
     this.map = new Map({
@@ -182,7 +139,6 @@ export class MapComponent implements OnInit {
   ) {}
 
   setPOIStyle = (feature: Feature) => {
-    console.log(feature.getKeys());
     return this.poi_style1;
   };
 
@@ -194,7 +150,7 @@ export class MapComponent implements OnInit {
     this.map.on('click', this.getFeaturePopUp);
 
     this.map.on('click', () => {
-      console.log(this.map.getLayers());
+
     });
     this.filteredFeatures();
   }
@@ -204,13 +160,17 @@ export class MapComponent implements OnInit {
       let name = message.name;
       let value = message.value;
       let isChecked = message.check;
-      if (name == 'district' && !isChecked) {
+
+      if (name == 'district' && isChecked) {
         this.handleFilteredLayer('stateID', value);
-      } else {
+      } else if (name == 'poi_types' && !isChecked) {
+
         this.handleFilteredLayer('typesID', value);
       }
     });
   }
+
+
 
   handleFilteredLayer(name: string, value: number): void {
     this.hiddenSource.clear();
@@ -221,7 +181,6 @@ export class MapComponent implements OnInit {
     if (features) {
       this.poi_layer.setVisible(false);
       this.hiddenSource.addFeatures(features);
-      this.hiddenLayer.setStyle();
     }
   }
   onZoomGetExtent(): void {
@@ -261,22 +220,6 @@ export class MapComponent implements OnInit {
       this.overlay.setPosition(undefined);
     }
   };
-
-  setPOITypesStyle(feature: any) {
-    var style;
-
-    switch (feature.get('typesID')) {
-      case 'hospital':
-        console.log(this.poi_style.getImage());
-        break;
-      case 'market':
-        break;
-      case 'resturant':
-        break;
-    }
-
-    return this.poi_style;
-  }
 
   setPoiTypesStyle = (feature: FeatureLike, resolution: number) => {
     let featureType = feature.getProperties()['types'];
