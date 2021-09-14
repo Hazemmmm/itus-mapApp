@@ -1,3 +1,4 @@
+import { InteractionDataService } from './../../Map/services/interaction-data.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
@@ -15,12 +16,12 @@ export class SideBarComponent implements OnInit {
   [x: string]: any;
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  states: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   stateFromList: any[];
-
+  state_id: any;
   constructor(
     private observer: BreakpointObserver,
-    private state: statesService
+    private state: statesService,
+    private interactionDataService: InteractionDataService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class SideBarComponent implements OnInit {
     this.state.getStateList().subscribe((res: any) => {
       for (let state of res.features) {
         this.stateList = state.properties;
+        this.state_id = this.stateList['STATE_CODE'];
         this.stateFromList.push(this.stateList);
       }
     });
@@ -55,7 +57,7 @@ export class SideBarComponent implements OnInit {
         }
       });
   }
-  onSelectDistrict(x: any) {
-    console.log(x);
+  onSelectDistrict(value: any) {
+    this.interactionDataService.sendListValue(value);
   }
 }

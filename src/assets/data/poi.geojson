@@ -17,7 +17,9 @@
         "OBJECTID_1" : 1,
         "types" : "hostpital",
         "title" : "hospital 1",
-        "desc" : "this is hopsital in western Austarlia"
+        "desc" : "this is hopsital in western Austarlia",
+        "typesID" : 1,
+        "stateID" : 5
       }
     },
     {
@@ -36,7 +38,9 @@
         "OBJECTID_1" : 2,
         "types" : "hostpital",
         "title" : "hostpital 2",
-        "desc" : "this is hopsital in western Austarlia"
+        "desc" : "this is hopsital in western Austarlia",
+        "typesID" : 1,
+        "stateID" : 5
       }
     },
     {
@@ -55,7 +59,9 @@
         "OBJECTID_1" : 3,
         "types" : "hostpital",
         "title" : "hostpital 3",
-        "desc" : "this is hopsital in South Austarlia"
+        "desc" : "this is hopsital in South Austarlia",
+        "typesID" : 1,
+        "stateID" : 4
       }
     },
     {
@@ -74,7 +80,9 @@
         "OBJECTID_1" : 4,
         "types" : "hostpital",
         "title" : "hostpital 4",
-        "desc" : "this is hopsital in Northern Territory"
+        "desc" : "this is hopsital in Northern Territory",
+        "typesID" : 1,
+        "stateID" : 7
       }
     },
     {
@@ -93,7 +101,9 @@
         "OBJECTID_1" : 5,
         "types" : "hostpital",
         "title" : "hostpital 5",
-        "desc" : "this is hopsital in Queensland"
+        "desc" : "this is hopsital in Queensland",
+        "typesID" : 1,
+        "stateID" : 3
       }
     },
     {
@@ -112,7 +122,9 @@
         "OBJECTID_1" : 6,
         "types" : "hostpital",
         "title" : "hostpital 6",
-        "desc" : "this is hopsital in new South Wales"
+        "desc" : "this is hopsital in new South Wales",
+        "typesID" : 1,
+        "stateID" : 1
       }
     },
     {
@@ -131,7 +143,9 @@
         "OBJECTID_1" : 7,
         "types" : "hostpital",
         "title" : "hostpital 7",
-        "desc" : "this is hopsital in new South Wales"
+        "desc" : "this is hopsital in new South Wales",
+        "typesID" : 1,
+        "stateID" : 1
       }
     },
     {
@@ -150,7 +164,9 @@
         "OBJECTID_1" : 8,
         "types" : "hostpital",
         "title" : "hostpital 8",
-        "desc" : "this is hopsital in Northern Territory"
+        "desc" : "this is hopsital in Northern Territory",
+        "typesID" : 1,
+        "stateID" : 7
       }
     },
     {
@@ -169,7 +185,9 @@
         "OBJECTID_1" : 9,
         "types" : "market",
         "title" : "market 1",
-        "desc" : "this is market in Western Austrlia"
+        "desc" : "this is market in Western Austrlia",
+        "typesID" : 2,
+        "stateID" : 5
       }
     },
     {
@@ -188,7 +206,9 @@
         "OBJECTID_1" : 10,
         "types" : "market",
         "title" : "market 2",
-        "desc" : "this is market in Western Austrlia"
+        "desc" : "this is market in Western Austrlia",
+        "typesID" : 2,
+        "stateID" : 5
       }
     },
     {
@@ -207,7 +227,9 @@
         "OBJECTID_1" : 11,
         "types" : "market",
         "title" : "market 3",
-        "desc" : "this is market in Northern Territory"
+        "desc" : "this is market in Northern Territory",
+        "typesID" : 2,
+        "stateID" : 7
       }
     },
     {
@@ -226,7 +248,9 @@
         "OBJECTID_1" : 12,
         "types" : "market",
         "title" : " market 4",
-        "desc" : "this is a market South"
+        "desc" : "this is a market South",
+        "typesID" : 2,
+        "stateID" : 4
       }
     },
     {
@@ -245,7 +269,9 @@
         "OBJECTID_1" : 13,
         "types" : "market",
         "title" : "market 5",
-        "desc" : "this is a market South"
+        "desc" : "this is a market South",
+        "typesID" : 2,
+        "stateID" : 4
       }
     },
     {
@@ -264,7 +290,9 @@
         "OBJECTID_1" : 14,
         "types" : "market",
         "title" : "market 6 ",
-        "desc" : "this is a market South"
+        "desc" : "this is a market South",
+        "typesID" : 2,
+        "stateID" : 4
       }
     },
     {
@@ -283,7 +311,9 @@
         "OBJECTID_1" : 16,
         "types" : "market",
         "title" : "market 8",
-        "desc" : "this is a market Queensland"
+        "desc" : "this is a market Queensland",
+        "typesID" : 2,
+        "stateID" : 3
       }
     },
     {
@@ -302,7 +332,9 @@
         "OBJECTID_1" : 17,
         "types" : "market",
         "title" : "market 9",
-        "desc" : "this is a market Queensland"
+        "desc" : "this is a market Queensland",
+        "typesID" : 2,
+        "stateID" : 3
       }
     },
     {
@@ -321,7 +353,9 @@
         "OBJECTID_1" : 18,
         "types" : "market",
         "title" : "market 10",
-        "desc" : "this is a market new South wales"
+        "desc" : "this is a market new South wales",
+        "typesID" : 2,
+        "stateID" : 1
       }
     },
     {
@@ -340,7 +374,9 @@
         "OBJECTID_1" : 21,
         "types" : "resturant",
         "title" : "resturant 2",
-        "desc" : "resturant in western "
+        "desc" : "resturant in western ",
+        "typesID" : 3,
+        "stateID" : 5
       }
     },
     {
@@ -359,7 +395,9 @@
         "OBJECTID_1" : 22,
         "types" : "resturant",
         "title" : "resturant 3",
-        "desc" : "resturant in western "
+        "desc" : "resturant in western ",
+        "typesID" : 3,
+        "stateID" : 5
       }
     },
     {
@@ -378,7 +416,9 @@
         "OBJECTID_1" : 23,
         "types" : "resturant",
         "title" : "resturant 4",
-        "desc" : "resturant in northern"
+        "desc" : "resturant in northern",
+        "typesID" : 3,
+        "stateID" : 7
       }
     },
     {
@@ -397,7 +437,9 @@
         "OBJECTID_1" : 26,
         "types" : "resturant",
         "title" : "resturant 5",
-        "desc" : "resturant in queensland"
+        "desc" : "resturant in queensland",
+        "typesID" : 3,
+        "stateID" : 3
       }
     },
     {
@@ -416,7 +458,9 @@
         "OBJECTID_1" : 28,
         "types" : "resturant",
         "title" : "resturant 6",
-        "desc" : "resturant in new south wales"
+        "desc" : "resturant in new south wales",
+        "typesID" : 3,
+        "stateID" : 1
       }
     },
     {
@@ -435,7 +479,9 @@
         "OBJECTID_1" : 29,
         "types" : "resturant",
         "title" : "resturant 7",
-        "desc" : "resturant in western "
+        "desc" : "resturant in western ",
+        "typesID" : 3,
+        "stateID" : 3
       }
     },
     {
@@ -454,7 +500,9 @@
         "OBJECTID_1" : 30,
         "types" : "resturant",
         "title" : "resturant 8",
-        "desc" : null
+        "desc" : null,
+        "typesID" : 3,
+        "stateID" : 1
       }
     }
   ]

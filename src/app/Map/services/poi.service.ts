@@ -7,6 +7,8 @@ import GeoJSON from 'ol/format/GeoJSON';
 import { Icon, Style } from 'ol/style';
 import { FeatureType } from '../models/featureType';
 import { Observable } from 'rxjs';
+import Feature from 'ol/Feature';
+import Geometry from 'ol/geom/Geometry';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +18,49 @@ export class PoiService {
   poi_source: VectorSource;
   poi_layer: VectorLayer;
   map: Map;
-  // featureProps: FeatureType;
+  features: any;
+  featureList: any;
+  featureFromList: any;
+  // hiddenSource: VectorSource;
+  // hiddenLayer: VectorLayer;
+  hospitalFeatures: [];
+  martketFeatures: [];
+  restaurantFeatures: [];
+
   public featureProps: Observable<FeatureType>;
 
-  poi_style: Style = new Style({
+  restaurant_poi_style: Style = new Style({
     image: new Icon({
+      color: 'green',
       anchor: [0.5, 0.96],
       crossOrigin: 'anonymous',
       src: 'https://openlayers.org/en/v4.6.5/examples/data/icon.png',
-      // src: './assets/images/hospital.png',
-      imgSize: [40, 40],
+      imgSize: [30, 30],
     }),
+  });
+  hostpital_poi_style: Style = new Style({
+    image: new Icon({
+      color: 'red',
+      anchor: [0.5, 0.96],
+      crossOrigin: 'anonymous',
+      src: 'https://openlayers.org/en/v4.6.5/examples/data/icon.png',
+      imgSize: [30, 30],
+    }),
+  });
+  market_poi_style: Style = new Style({
+    image: new Icon({
+      color: 'orange',
+      anchor: [0.5, 0.5],
+      crossOrigin: 'anonymous',
+      src: 'assets/hospital.png',
+      imgSize: [30, 30],
+    }),
+  });
+  hiddenSource = new VectorSource();
+  hiddenLayer = new VectorLayer({
+    source: this.hiddenSource,
+    visible: true,
+    zIndex: 10,
   });
 
   constructor(private http: HttpClient) {}
@@ -46,15 +80,17 @@ export class PoiService {
         zIndex: 3,
       });
 
-      map.addLayer(this.poi_layer);
+      // map.addLayer(this.poi_layer);
     });
   }
 
   setPOIStyle = (feature: any) => {
-    return this.poi_style;
+    return this.market_poi_style;
   };
 
-  getPOITypes(): Observable<FeatureType> {
+  handleFilterPoiLayer(): void {}
+
+  getPOITypes(): Observable<any> {
     this.http.get(this.url).subscribe((res: any) => {
       for (let feature of res.features) {
         this.featureProps = feature.properties;
@@ -62,5 +98,24 @@ export class PoiService {
     });
 
     return this.featureProps;
+  }
+
+  getPoiData(): Observable<any> {
+    return this.http.get(this.url);
+  }
+
+  getPoiFeaturesById(id: number): void {
+    this.poi_source.getFeatures().filter((features) => {
+      console.log(features);
+      if (features.get('typesID') == id) {
+        this.featureList = features;
+        this.poi_layer.setVisible(false);
+
+        this.hiddenSource.addFeatures(this.featureList);
+      } else {
+        console.log('not working');
+        this.poi_layer.setVisible(true);
+      }
+    });
   }
 }

@@ -1,7 +1,7 @@
 <mat-form-field appearance="fill">
   <mat-label>Filter POIs'</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let poi of pois" [value]="poi.value">
+  <mat-select (selectionChange)="changeClient($event)">
+    <mat-option *ngFor="let poi of pois" [value]="poi.id">
       {{ poi.viewValue }}
     </mat-option>
   </mat-select>
