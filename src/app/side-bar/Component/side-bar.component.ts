@@ -18,6 +18,8 @@ export class SideBarComponent implements OnInit {
   sidenav!: MatSidenav;
   stateFromList: any[];
   state_id: any;
+  isChecked: boolean = false;
+  element: number;
   constructor(
     private observer: BreakpointObserver,
     private state: statesService,
@@ -29,7 +31,7 @@ export class SideBarComponent implements OnInit {
     this.getStateList();
   }
 
-  getStateList() {
+  getStateList(): void {
     this.state.getStateList().subscribe((res: any) => {
       for (let state of res.features) {
         this.stateList = state.properties;
@@ -39,11 +41,7 @@ export class SideBarComponent implements OnInit {
     });
   }
 
-  onChange(event: any) {
-    console.log(event.value);
-  }
-
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.observer
       .observe(['(max-width: 800px)'])
       .pipe(delay(1))
@@ -58,6 +56,20 @@ export class SideBarComponent implements OnInit {
       });
   }
   onSelectDistrict(value: any) {
-    this.interactionDataService.sendListValue(value);
+    this.isChecked = !this.isChecked;
+
+    // this.interactionDataService.sendFeatureId({
+    //   value: value,
+    //   name: 'stateID'
+    // });
+    for (let i = 0; i < value.length; i++) {
+      this.element = value[i].STATE_CODE;
+    }
+    console.log('button list', this.isChecked);
+    this.interactionDataService.sendFeatureId({
+      value: Number(this.element),
+      name: 'district',
+      check: this.isChecked,
+    });
   }
 }

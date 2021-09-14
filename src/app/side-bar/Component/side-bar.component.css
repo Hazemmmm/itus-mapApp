@@ -63,3 +63,20 @@ mat-divider {
   margin-bottom: 40px;
   background-color: rgba(255, 255, 255, 0.5);
 }
+::ng-deep .ol-zoom {
+  background: #002b5c;
+  border-radius: 40%;
+}
+::ng-deep .ol-control {
+  background: #002b5c;
+  border-radius: 25%;
+}
+::ng-deep .ol-control:hover {
+  background-color: rgba(255, 215, 19, 0.5);
+}
+
+::ng-deep .ol-zoom-in,
+.ol-zoom-out {
+  background-color: yellow;
+  border-radius: 40%;
+}

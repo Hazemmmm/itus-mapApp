@@ -59,6 +59,7 @@ export class statesService {
       });
       this.states_layer = new VectorLayer({
         source: this.states_source,
+        zIndex: 1,
         // style: this.setStateStyle,
       });
 

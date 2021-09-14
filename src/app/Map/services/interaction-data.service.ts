@@ -6,7 +6,7 @@ import { PoiService } from './poi.service';
   providedIn: 'root',
 })
 export class InteractionDataService {
-  private _featureIdSource = new Subject<number>();
+  private _featureIdSource = new Subject<any>();
   private _districtValue = new Subject<any>();
 
   featureIdSource$ = this._featureIdSource.asObservable();
@@ -15,7 +15,7 @@ export class InteractionDataService {
 
   constructor(private poiService: PoiService) {}
 
-  sendFeatureId(value: number): void {
+  sendFeatureId(value: { value: number; name: string; check: boolean }): void {
     this._featureIdSource.next(value);
   }
   sendListValue(value: any): void {

@@ -6,3 +6,5 @@ export interface FeatureType {
   title: string;
   types: string;
 }
+
+

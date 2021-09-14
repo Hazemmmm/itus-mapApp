@@ -20,7 +20,15 @@ export class FilterComponent implements OnInit {
   ];
 
   ngOnInit(): void {}
-  changeClient(event: any) {
-    this.interActionDataService.sendFeatureId(event.value);
+  onSelectPOI(event: any) {
+    // this.interActionDataService.sendFeatureId({
+    //   value: event.value,
+    //   name: 'typesID',
+    // });
+    this.interActionDataService.sendFeatureId({
+      value: event.value,
+      name: 'poi_types',
+      check: false
+    });
   }
 }

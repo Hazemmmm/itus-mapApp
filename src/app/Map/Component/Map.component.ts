@@ -15,6 +15,9 @@ import { Coordinate, toStringHDMS } from 'ol/coordinate';
 import { toLonLat } from 'ol/proj';
 import { InteractionDataService } from '../services/interaction-data.service';
 import GeoJSON from 'ol/format/GeoJSON';
+import { Circle, Fill, Stroke, Style } from 'ol/style';
+import { FeatureLike } from 'ol/Feature';
+import CircleStyle from 'ol/style/Circle';
 
 @Component({
   selector: 'app-Map',
@@ -38,18 +41,45 @@ export class MapComponent implements OnInit {
   hiddenSource: VectorSource;
   poi_layer: VectorLayer;
   hiddenLayer: VectorLayer;
+  test_soruce: VectorSource;
+  test_layer: VectorLayer;
 
   australiaExtent: Extent = [
     -262.2318712410088, -42.414667622100076, -188.84319936600878,
     -9.060175434600076,
   ];
-  test_soruce: VectorSource;
-  test_layer: VectorLayer;
-  osm: TileLayer = new TileLayer({
-    source: new OSM(),
-    zIndex: 0,
+
+  poi_style = new Style({
+    image: new Circle({
+      radius: 7,
+      fill: new Fill({ color: 'black' }),
+      stroke: new Stroke({
+        color: 'red',
+        width: 2,
+      }),
+    }),
+  });
+  poi_style1 = new Style({
+    image: new Circle({
+      radius: 7,
+      fill: new Fill({ color: 'black' }),
+      stroke: new Stroke({
+        color: 'red',
+        width: 2,
+      }),
+    }),
   });
 
+  poi_style2 = new Style({
+    image: new Circle({
+      radius: 7,
+      fill: new Fill({ color: 'black' }),
+      stroke: new Stroke({
+        color: 'red',
+        width: 2,
+      }),
+    }),
+  });
   private initMap(): void {
     this.overlay = new Overlay({
       element: <HTMLDivElement>document.getElementById('popup'),
@@ -75,13 +105,65 @@ export class MapComponent implements OnInit {
     this.poi_layer = new VectorLayer({
       source: this.poi_source,
       zIndex: 5,
+      style: this.setPoiTypesStyle,
+      // style: function (feature, resolution) {
+      //   var style;
+      //   console.log(feature.getProperties()['types']);
+      //   switch (feature.getProperties()['types']) {
+      //     case 'hospital':
+      //       style = new Style({
+      //         image: new Circle({
+      //           radius: 7,
+      //           fill: new Fill({ color: 'black' }),
+      //           stroke: new Stroke({
+      //             color: 'red',
+      //             width: 2,
+      //           }),
+      //         }),
+      //       });
+      //       break;
+      //     case 'market':
+      //       style = new Style({
+      //         image: new Circle({
+      //           radius: 7,
+      //           fill: new Fill({ color: 'black' }),
+      //           stroke: new Stroke({
+      //             color: 'green',
+      //             width: 2,
+      //           }),
+      //         }),
+      //       });
+      //       break;
+      //     case 'resturant':
+      //       style = new Style({
+      //         image: new Circle({
+      //           radius: 7,
+      //           fill: new Fill({ color: 'black' }),
+      //           stroke: new Stroke({
+      //             color: 'yellow',
+      //             width: 2,
+      //           }),
+      //         }),
+      //       });
+      //       break;
+      //   }
+
+      //   return [style];
+      // },
     });
 
     this.map = new Map({
       overlays: [this.overlay],
       controls: defaults({ attribution: false }).extend([new FullScreen()]),
       target: 'map',
-      layers: [this.osm, this.poi_layer, this.hiddenLayer],
+      layers: [
+        new TileLayer({
+          source: new OSM(),
+          zIndex: 0,
+        }),
+        this.poi_layer,
+        this.hiddenLayer,
+      ],
       view: new View({
         extent: this.australiaExtent,
         center: getCenter(this.australiaExtent),
@@ -92,56 +174,55 @@ export class MapComponent implements OnInit {
       }),
     });
   }
+
   constructor(
     private states: statesService,
     private poi: PoiService,
     private interactionDataService: InteractionDataService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.district);
-    this.interactionDataService.districtValue$.subscribe((value) => {
-      // let x = value.toString();
-      for (let i = 0; i < value.length; i++) {
-        const element = value[i];
-        let state_id = parseInt(element['STATE_CODE']);
-        console.log(typeof state_id);
-        this.interactionDataService.featureIdSource$.subscribe((featureId) => {
-          let features = this.poi_layer
-            .getSource()
-            .getFeatures()
-            .filter((feat) => {
-              console.log(feat.get('stateID') == featureId);
-            });
-          if (features) {
-            this.map.getView().getZoom() + 1;
-          }
-        });
-      }
-    });
+  setPOIStyle = (feature: Feature) => {
+    console.log(feature.getKeys());
+    return this.poi_style1;
+  };
 
+  ngOnInit(): void {
     this.initMap();
     this.states.getStatesData(this.map);
-    this.poi.getPOIData(this.map);
+    // this.poi.getPOIData(this.map);
     this.poi.handleFilterPoiLayer();
     this.map.on('click', this.getFeaturePopUp);
 
-    this.onChangeFilterList();
+    this.map.on('click', () => {
+      console.log(this.map.getLayers());
+    });
+    this.filteredFeatures();
   }
 
-  onChangeDistrictList(): void {}
-  onChangeFilterList(featureId?: any): void {
-    this.interactionDataService.featureIdSource$.subscribe((featureId) => {
-      this.hiddenSource.clear();
-      let features = this.poi_layer
-        .getSource()
-        .getFeatures()
-        .filter((feat) => feat.get('typesID') == featureId);
-      if (features) {
-        this.poi_layer.setVisible(false);
-        this.hiddenSource.addFeatures(features);
+  filteredFeatures(featureId?: any): void {
+    this.interactionDataService.featureIdSource$.subscribe((message) => {
+      let name = message.name;
+      let value = message.value;
+      let isChecked = message.check;
+      if (name == 'district' && !isChecked) {
+        this.handleFilteredLayer('stateID', value);
+      } else {
+        this.handleFilteredLayer('typesID', value);
       }
     });
+  }
+
+  handleFilteredLayer(name: string, value: number): void {
+    this.hiddenSource.clear();
+    let features = this.poi_layer
+      .getSource()
+      .getFeatures()
+      .filter((feat) => feat.get(name) == value);
+    if (features) {
+      this.poi_layer.setVisible(false);
+      this.hiddenSource.addFeatures(features);
+      this.hiddenLayer.setStyle();
+    }
   }
   onZoomGetExtent(): void {
     this.map.on('click', () => {
@@ -166,7 +247,6 @@ export class MapComponent implements OnInit {
       }
     );
     if (feature && feature.getGeometry().getType() === 'Point') {
-      console.log(feature);
       let point: Point = <Point>feature.getGeometry();
       let coords: Coordinate = point.getCoordinates();
       const coordinate = e.coordinate;
@@ -180,5 +260,50 @@ export class MapComponent implements OnInit {
     } else {
       this.overlay.setPosition(undefined);
     }
+  };
+
+  setPOITypesStyle(feature: any) {
+    var style;
+
+    switch (feature.get('typesID')) {
+      case 'hospital':
+        console.log(this.poi_style.getImage());
+        break;
+      case 'market':
+        break;
+      case 'resturant':
+        break;
+    }
+
+    return this.poi_style;
+  }
+
+  setPoiTypesStyle = (feature: FeatureLike, resolution: number) => {
+    let featureType = feature.getProperties()['types'];
+    let color;
+
+    switch (featureType) {
+      case 'market':
+        color = 'blue';
+        break;
+      case 'resturant':
+        color = 'orange';
+        break;
+      case 'hospital':
+        color = 'red';
+        break;
+    }
+
+    return [
+      new Style({
+        image: new CircleStyle({
+          radius: 7,
+          fill: new Fill({ color: color }),
+          stroke: new Stroke({
+            width: 1,
+          }),
+        }),
+      }),
+    ];
   };
 }

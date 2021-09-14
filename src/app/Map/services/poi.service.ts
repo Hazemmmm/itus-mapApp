@@ -106,14 +106,14 @@ export class PoiService {
 
   getPoiFeaturesById(id: number): void {
     this.poi_source.getFeatures().filter((features) => {
-      console.log(features);
+
       if (features.get('typesID') == id) {
         this.featureList = features;
         this.poi_layer.setVisible(false);
 
         this.hiddenSource.addFeatures(this.featureList);
       } else {
-        console.log('not working');
+     
         this.poi_layer.setVisible(true);
       }
     });
